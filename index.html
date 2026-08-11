@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Corporate Majboor — Office vibes for the working soul</title>
+    <meta name="description" content="Corporate Majboor — music for the corporate warrior. Chill beats for the 9-to-5 grind." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700;900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Background -->
+    <div id="bg-overlay"></div>
+    <img id="bg-image" src="/bg0.png" alt="" />
+
+    <!-- Top Bar -->
+    <header id="top-bar">
+      <div id="clock" class="top-item" style="justify-content: flex-start;"></div>
+      <!-- Quote (moved to top center) -->
+      <div id="quote-area">
+        <p id="quote-text"></p>
+        <button id="quote-next" title="Next quote">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <div id="users-online" class="top-item" style="justify-content: flex-end;">
+        <span class="green-dot"></span>
+        <span id="user-count">0</span>
+        <span class="label">bugs fixed</span>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+      <h1 id="title">
+        <span class="main-title">CORPORATE MAJBOOR</span>
+      </h1>
+
+      <!-- Debug Button (moved to center below title) -->
+      <button id="debug-btn" class="glass-btn icon-only" title="Debug" style="margin-top: 15px;">
+        <img src="/debug.svg" alt="Debug" width="26" height="26" />
+      </button>
+    </main>
+
+    <!-- Music Player — Floating Pill -->
+    <footer id="player-bar">
+      <div id="player-pill">
+        <!-- Album art + info -->
+        <div id="player-info">
+          <div id="album-art">
+            <span id="album-emoji">🎵</span>
+          </div>
+          <div id="track-details">
+            <p id="track-title">Click play to begin</p>
+            <p id="track-artist"></p>
+          </div>
+        </div>
+
+        <!-- Controls row -->
+        <div id="player-controls">
+          <button id="vol-btn" class="ctrl-btn" title="Volume">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+          </button>
+          <button id="prev-btn" class="ctrl-btn" title="Previous">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+            </svg>
+          </button>
+          <button id="play-btn" class="ctrl-btn play" title="Play / Pause">
+            <svg id="play-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            <svg id="pause-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
+              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+          </button>
+          <button id="next-btn" class="ctrl-btn" title="Next">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+            </svg>
+          </button>
+          <button id="list-btn" class="ctrl-btn" title="Playlist">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+          </button>
+
+        <!-- Progress -->
+        <div id="progress-area">
+          <span id="current-time">0:00</span>
+          <span class="progress-separator">/</span>
+          <span id="total-time">0:00</span>
+        </div>
+      </div>
+
+      <!-- Hidden seek bar (click on pill progress to seek) -->
+      <input type="range" id="seek-bar" min="0" max="100" value="0" step="0.1" class="sr-only" />
+      <input type="range" id="volume-bar" min="0" max="100" value="80" class="sr-only" />
+    </footer>
+
+
+    <!-- Playlist Drawer -->
+    <div id="playlist-overlay" class="hidden">
+      <div id="playlist-drawer">
+        <div id="playlist-header">
+          <h2>🎧 Playlist</h2>
+          <button id="playlist-close">&times;</button>
+        </div>
+        <ul id="playlist-list"></ul>
+      </div>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="audio-element" preload="auto"></audio>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
